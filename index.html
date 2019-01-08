@@ -3,6 +3,18 @@
     <title>Home | Naborisk</title>
   </head>
   <body>
-    <h1>Hello, World!</h1>
+    <div id="repos"></div>
   </body>
+  <script>
+    let repoView = document.getElementById('repos')
+
+    fetch('https://api.github.com/users/naborisk/repos')
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        let repos = json.map(repo => `<a href="${repo.html_url}">${repo.name}</a><br>`)
+
+        repoView.innerHTML += repos.join('')
+      })
+  </script>
 </html>
